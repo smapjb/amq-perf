@@ -1,5 +1,5 @@
 ---
-- name: Playbook to install artemis
+- name: Playbook to AMQ performance Battery
   hosts: all
 
   vars_files:
