@@ -51,8 +51,6 @@ Note that writing the playbooks with `hosts: all` and defining groups in this wa
 
 ## TODO
 
-I need to collect the results from the test servers and bring them local
-
 Update the notes with the correct variable names to override.
 
 Maybe think about clean up - I have the luxury of throwing away my infra (cattle)
