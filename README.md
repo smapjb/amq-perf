@@ -8,6 +8,10 @@ Adjust this to fit your environment. E.g. you may already have a different java 
 
 ## Instructions
 
+I have tried to make this as friendly as possible for use within a locked down environment. One assumption that I have made is that you have access to the RHEL ecosystem - ie you have access to standard rhel yum channels either via satellite or access.redhat.com.
+
+All other dependencies can be overriden to pull from local proxies or self hosted servers. For example in `site.yml` you can override the Maven proxy to point to your corporate Artifactory or Nexus, and you can pull the Josh Dreagon zip archive from whereever you have downloaded it.
+
 ### Package install
 
 To run the playbook simply replace this with your inventory. Notice the --limit this confines the playbook to the group client_hosts this is because the playbook has hosts: all ready for execution in Tower.
