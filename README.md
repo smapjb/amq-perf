@@ -1,4 +1,4 @@
-# Playbook to install Red Hat AMQ
+# Playbook run performance battery against Red Hat AMQ
 
 This playbook assumes that you have a amq broker installed and running that you want to test against.
 
@@ -8,7 +8,7 @@ Adjust this to fit your environment. E.g. you may already have a different java 
 
 ## Instructions
 
-## Package install
+### Package install
 
 To run the playbook simply replace this with your inventory. Notice the --limit this confines the playbook to the group client_hosts this is because the playbook has hosts: all ready for execution in Tower.
 
@@ -20,7 +20,7 @@ The site playbook will install the package dependencies and will install Maven, 
 
 Note that this playbook works for rhel 7 and rhel 8. On rhel 7 it uses software collections to install Maven. You will need access to the software collections channel.
 
-## Battery
+### Battery
 
 The battery role and playbook is a simplified/generalised version of Josh West's battery playbooks https://github.com/shuawest/amq-perf-battery.git
 
@@ -32,7 +32,7 @@ Note that in an Ansible role the default/main.yml has the least order of variabl
 
 I have included a notes.txt in this repository that has the set of tests that were run in Josh Wests amq-perf-battery so that you can see the diffent scenarios that could be used as input to the battery.yml playbook.
 
-## Inventory
+### Inventory
 
 Note that I have used --limit on the playbook run command line. In the case of this project it will expect a inventory like.
 
