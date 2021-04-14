@@ -1,0 +1,17 @@
+plugin: ovirt.ovirt.ovirt
+ovirt_url: https://rhvm.internal.croftvillas.com/ovirt-engine/api
+ovirt_username: admin@internal
+# ovirt_query_filter:
+#   search: 'name=citi* AND cluster=Cluster01'
+#   case_sensitive: no
+#   max: 15
+keyed_groups:
+  - key: cluster
+    prefix: 'cluster'
+groups:
+  label_cluster_true: "'amq_cluster' in tags"
+  label_amq_master: "'amq_master' in tags"
+  label_amq_slave: "'amq_slave' in tags"
+  client_hosts: "'beelinks' in tags"
+compose:
+  ansible_host: devices["eth0"][0]

@@ -1,0 +1,13 @@
+---
+- name: Playbook to install artemis
+  hosts: all
+
+  vars_files:
+    - secrets.yml
+  
+  roles:
+  # Subscribe the newly provisioned servers and install pre-req packages
+  - role: packages
+    maven_proxy: http://toolchain.internal.croftvillas.com:8081/artifactory
+    amq_perf_test_archive: https://github.com/joshdreagan/amqp-perf-test/archive/refs/heads/master.zip
+ 

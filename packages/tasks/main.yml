@@ -1,0 +1,44 @@
+- block:
+  - name: Make sure machine is subscribed
+    redhat_subscription:
+      state: present
+      username: "{{ rhn_user }}"
+      password: "{{ rhn_pass }}"
+      auto_attach: true
+
+  - name: Enable a Software Collections SCL
+    rhsm_repository:
+      name: rhel-server-rhscl-7-rpms
+      state: enabled
+    when: ansible_facts.distribution_major_version  == '7'
+
+  - name: Install pre-req packages
+    yum:
+      name:
+      - "{{ 'rh-maven36-maven'  if ansible_facts.distribution_major_version  == '7' else 'maven' }}"
+      - java-1.8.0-openjdk
+      - java-1.8.0-openjdk-devel
+      - unzip
+      state: latest
+  become: true
+
+- name: Ensures .m2 dir exists
+  file: path=~/.m2 state=directory
+
+- name: "Configure Maven settings.xml"
+  template:
+    src: "settings.xml"
+    dest: "~/.m2/settings.xml"
+
+- name: "Download and extract perf tools"
+  unarchive:
+    src: "{{ amq_perf_test_archive }}"
+    dest: "~"
+    remote_src: yes
+
+- name: Build the amq-perf-test using maven from SCL
+  shell: "{{ 'source scl_source enable rh-maven36 && '  if ansible_facts.distribution_major_version  == '7' }} mvn clean install"
+  args:
+    chdir: "amqp-perf-test-master"
+  register: results
+  failed_when: "'BUILD SUCCESS' not in results.stdout"

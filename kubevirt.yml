@@ -1,0 +1,11 @@
+# Use default config (~/.kube/config) file and active context, and return vms with interfaces
+# connected to network myovsnetwork and from namespace vms
+plugin: community.kubevirt.kubevirt
+cache: no
+connections:
+  - namespaces:
+    - virtual-machines
+host_format: "{name}"
+  
+
+

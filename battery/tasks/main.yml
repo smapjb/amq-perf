@@ -1,0 +1,11 @@
+---
+- name: configure consumers
+  include_tasks: perf-consumer.yaml
+
+- name: configure producers
+  include_tasks: perf-producer.yaml
+
+# - name: Pause while running load test 
+#   pause:
+#     minutes: 6
+

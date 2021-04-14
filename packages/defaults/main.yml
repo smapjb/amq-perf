@@ -1,0 +1,5 @@
+# override these variables by using ansible-vaulted secrets
+rhn_user: user
+rhn_pass: password
+maven_proxy: http://toolchain.internal.croftvillas.com:8081/artifactory
+amq_perf_test_archive: https://github.com/joshdreagan/amqp-perf-test/archive/refs/heads/master.zip
