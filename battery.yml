@@ -5,20 +5,20 @@
   roles:
   # Run a producer consumer battery test see defaults for variables to override
   - role: battery
-    client_name: "p_pg_caa_paa_1-{{ansible_fqdn}}"
+    battery_name: np_pg_caa_paa_1
+    client_name: "{{battery_name}}-{{ansible_fqdn}}"
     amq_host: amq01.prod.croftvillas.com
     perf_destName: queue://TEST.PERF
     perf_producer_messageSize: 1024
     perf_producer_heap_min: 3G
     perf_producer_heap_max: 3G
-    perf_producer_clients: 4
+    perf_producer_clients: 8
     perf_producer_sessTransacted: false
     perf_producer_sessAckMode: autoAck
-    perf_producer_deliveryMode: persistent 
+    perf_producer_deliveryMode: nonpersistent 
 
     perf_consumer_heap_min: 3G
     perf_consumer_heap_max: 3G
-    perf_consumer_clients: 4
+    perf_consumer_clients: 8
     perf_consumer_sessTransacted: false
     perf_consumer_sessAckMode: autoAck
-

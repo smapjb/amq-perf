@@ -2,8 +2,8 @@
 amq_root: /home/cloud-user
 amq_perf_test_path: "{{amq_root}}/amqp-perf-test-master"
 
-amq_battery_run_id: a1
-amq_battery_run_root: "{{amq_root}}/amq-perf-battery/runs"
+# Where to put fetched results relative to playbook execution
+results_dir: output
 
 amq_host: localhost
 amq_port_offset: 0
