@@ -29,10 +29,10 @@
 - name: Check the consumer started
   shell: jps -mlvV
   register: proclist
+  failed_when: "client_name not in proclist.stdout"
+
 - name: Display consumer processes after start
   debug: 
     msg: "Processes running on {{ansible_hostname}} \n{{proclist.stdout}}"
-
-# TODO: fail if the client_name isn't in the jps verbose out
 
 

@@ -5,10 +5,19 @@
 - name: configure producers
   include_tasks: perf-producer.yml
 
-# dont like pause TODO find a way to determine when test has finished - likely build success in maven log
-- name: Pause while running load test 
-  pause:
-    minutes: 6
+# # dont like pause TODO find a way to determine when test has finished - likely build success in maven log
+# - name: Pause while running load test 
+#   pause:
+#     minutes: 6
+
+- name: Wait for the maven test run to finish for the consumer
+  wait_for:
+    path: "{{amq_perf_test_path}}/target/{{client_name}}-consumer.log"
+    search_regex: "BUILD SUCCESS"
+    delay: 10
+    timeout: 360
+    msg: "Test run did not complete"
+  register: waitfor
 
 - name: "fetch results into local directory {{results_dir}}"
   include_tasks: fetch_results.yml
