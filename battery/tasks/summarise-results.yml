@@ -11,7 +11,7 @@
   shell: |    
     RESULT_LOG=`ls | grep '{{client_name}}' | grep 'consumer.log'`     
     function extract() {
-      cat $RESULT_LOG | grep "$1" | sed "s/$1//g"
+      cat $RESULT_LOG | grep "$1" | sed "s/$1//g" | awk '{printf("%.2f\n", $1)}'
     }
     SYS_TP=`extract "System Total Throughput: "`
     SYS_AVG_TP=`extract "System Average Throughput: "`
