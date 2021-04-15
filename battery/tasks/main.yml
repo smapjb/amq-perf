@@ -5,12 +5,13 @@
 - name: configure producers
   include_tasks: perf-producer.yml
 
+# Note I have calculated the timeout based on how long the consumers are set to run + 10s
 - name: Wait for the maven test run to finish for the consumer
   wait_for:
     path: "{{amq_perf_test_path}}/target/{{client_name}}-consumer.log"
     search_regex: "BUILD SUCCESS"
     delay: 10
-    timeout: 360
+    timeout: "{{ (perf_consumer_recvDuration / 1000 + 10 ) | round | int }}"
     msg: "Test run did not complete"
 
 - name: "fetch results into local directory {{results_dir}}"
