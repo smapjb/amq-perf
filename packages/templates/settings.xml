@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+  <mirrors>
+    <mirror>
+      <id>nexus</id>
+      <mirrorOf>*</mirrorOf>
+      <url>{{ maven_proxy }}</url>
+    </mirror>
+  </mirrors>
   <profiles>
     <profile>
+      <id>nexus</id>
+      <!--Enable snapshots for the built in central repo to direct -->
+      <!--all requests to nexus via the mirror -->
       <repositories>
         <repository>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
           <id>central</id>
-          <name>libs-release</name>
-          <url>{{ maven_proxy }}/libs-release</url>
-        </repository>
-        <repository>
-          <snapshots />
-          <id>snapshots</id>
-          <name>libs-snapshot</name>
-          <url>{{ maven_proxy }}/libs-snapshot</url>
+          <url>http://central</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
         </repository>
       </repositories>
       <pluginRepositories>
         <pluginRepository>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
           <id>central</id>
-          <name>plugins-release</name>
-          <url>{{ maven_proxy }}/plugins-release</url>
-        </pluginRepository>
-        <pluginRepository>
-          <snapshots />
-          <id>snapshots</id>
-          <name>plugins-snapshot</name>
-          <url>{{ maven_proxy }}/plugins-snapshot</url>
+          <url>http://central</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
         </pluginRepository>
       </pluginRepositories>
-      <id>artifactory</id>
     </profile>
   </profiles>
   <activeProfiles>
-    <activeProfile>artifactory</activeProfile>
+    <!--make the profile active all the time -->
+    <activeProfile>nexus</activeProfile>
   </activeProfiles>
 </settings>
