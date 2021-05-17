@@ -32,7 +32,8 @@
 - name: Check the producer started
   shell: jps -mlvV
   register: proclist
-  failed_when: "client_name not in proclist.stdout"
+  failed_when: proclist.stdout is regex('^.*:producer .*client_name.*$')
+
 
 - name: Display producer processes after start
   debug: 

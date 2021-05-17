@@ -29,7 +29,7 @@
 - name: Check the consumer started
   shell: jps -mlvV
   register: proclist
-  failed_when: "client_name not in proclist.stdout"
+  failed_when: proclist.stdout is regex('^.*:consumer .*client_name.*$')
 
 - name: Display consumer processes after start
   debug: 
