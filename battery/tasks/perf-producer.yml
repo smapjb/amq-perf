@@ -24,7 +24,7 @@
   args:
     chdir: "{{amq_perf_test_path}}"
   shell: |
-    export MAVEN_OPTS="-Xmx{{perf_producer_heap_min}} -Xms{{perf_producer_heap_max}}" 
+    export MAVEN_OPTS="-Xms{{perf_producer_heap_min}} -Xmx{{perf_producer_heap_max}}" 
     {{ 'source scl_source enable rh-maven36 && '  if ansible_facts.distribution_major_version  == '7' }} nohup mvn activemq-perf:producer \
       -DsysTest.propsConfigFile=src/main/resources/{{client_name}}-amqp-producer.properties \
       > {{amq_perf_test_path}}/target/{{client_name}}-producer.log 2>&1 &
